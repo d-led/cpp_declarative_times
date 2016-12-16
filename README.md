@@ -13,3 +13,5 @@ or
 ```cpp
 42_times(do_something);
 ```
+
+Feel free to use. No guarantees.
