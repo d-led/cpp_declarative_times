@@ -7,3 +7,9 @@ Benchmarks: [![Build Status](https://travis-ci.org/d-led/cpp_declarative_times.s
     do_something();
 });
 ```
+
+or
+
+```cpp
+42_times(do_something);
+```
