@@ -23,16 +23,6 @@ namespace declarative_times {
             start(start),
             step(step)
         {}
-
-        Base starting_from(CountType start_from)
-        {
-            return Base{ n_times, start_from };
-        }
-
-        Base with_step(CountType step_size)
-        {
-            return Base{ n_times, start, step_size };
-        }
     };
 
     template <typename CT = unsigned long long>
@@ -56,6 +46,16 @@ namespace declarative_times {
         {
             for (auto i = 0; i < this->n_times; i++)
                 what(i*this->step + this->start);
+        }
+
+        execute_with_index starting_from(CountType start_from)
+        {
+            return execute_with_index{ n_times, start_from };
+        }
+
+        execute_with_index with_step(CountType step_size)
+        {
+            return execute_with_index{ n_times, start, step_size };
         }
     };
 
