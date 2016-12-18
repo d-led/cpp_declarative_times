@@ -45,7 +45,7 @@ TEST_CASE_METHOD(declarative_times_should, "work for non-constant counters too")
 }
 
 TEST_CASE_METHOD(declarative_times_should, "start from non-zero values too") {
-    (2_times)
+    (2_times_with_index)
         .starting_from(2)
         ([this](CountType i) { tick(i); });
 
@@ -55,7 +55,7 @@ TEST_CASE_METHOD(declarative_times_should, "start from non-zero values too") {
 }
 
 TEST_CASE_METHOD(declarative_times_should, "start from non-zero values with custom step") {
-    (3_times)
+    (3_times_with_index)
         .starting_from(2)
         .with_step(3)
         ([this](CountType i) { tick(i); });
@@ -66,7 +66,7 @@ TEST_CASE_METHOD(declarative_times_should, "start from non-zero values with cust
 }
 
 TEST_CASE_METHOD(declarative_times_should, "terminate on counter overflow and wrap it as expected") {
-    (3_times)
+    (3_times_with_index)
         .starting_from(2)
         .with_step(std::numeric_limits<CountType>::max())
         ([this](CountType i) { tick(i); });

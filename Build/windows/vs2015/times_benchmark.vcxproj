@@ -179,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\benchmark\first_metaprogram_version.cpp" />
     <ClCompile Include="..\..\..\src\benchmark\main.cpp" />
+    <ClCompile Include="..\..\..\src\benchmark\simpler_version.cpp" />
     <ClCompile Include="..\..\..\src\benchmark\std_function_version.cpp" />
     <ClCompile Include="..\..\..\src\benchmark\times_fixture.cpp" />
   </ItemGroup>

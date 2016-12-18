@@ -129,6 +129,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/first_metaprogram_version.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/simpler_version.o \
 	$(OBJDIR)/std_function_version.o \
 	$(OBJDIR)/times_fixture.o \
 
@@ -192,6 +193,9 @@ $(OBJDIR)/first_metaprogram_version.o: ../../../src/benchmark/first_metaprogram_
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../../../src/benchmark/main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/simpler_version.o: ../../../src/benchmark/simpler_version.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/std_function_version.o: ../../../src/benchmark/std_function_version.cpp

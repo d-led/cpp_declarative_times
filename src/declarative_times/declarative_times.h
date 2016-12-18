@@ -4,51 +4,58 @@
 
 namespace declarative_times {
 
-    template <typename CT = unsigned long long>
-    struct execute {
+    template <class Base, typename CT = unsigned long long>
+    struct execute_data {
         using CountType = CT;
         const CountType n_times;
         const CountType start = 0;
         const CountType step = 1;
 
-        execute(CountType n) : n_times(n) {}
+        execute_data(CountType n) : n_times(n) {}
 
-        execute(CountType n_times, CountType start) :
+        execute_data(CountType n_times, CountType start) :
             n_times(n_times),
             start(start)
         {}
 
-        execute(CountType n_times, CountType start, CountType step) :
+        execute_data(CountType n_times, CountType start, CountType step) :
             n_times(n_times),
             start(start),
             step(step)
         {}
 
-        execute starting_from(CountType start_from)
+        Base starting_from(CountType start_from)
         {
-            return execute<>{ n_times, start_from };
+            return Base{ n_times, start_from };
         }
 
-        execute with_step(CountType step_size)
+        Base with_step(CountType step_size)
         {
-            return execute<>{ n_times, start, step_size };
+            return Base{ n_times, start, step_size };
         }
+    };
 
-        CountType total_times() const
-        {
-            return n_times;
-        }
+    template <typename CT = unsigned long long>
+    struct execute : execute_data <execute<CT>, CT> {
+        using execute_data<execute<CT>, CT>::execute_data;
 
-        void operator() (std::function<void()> what)
+        template <typename Callable>
+        void operator() (Callable what)
         {
-            for (CountType i = 0; i < n_times; i++)
+            for (auto i = 0; i < this->n_times; i++)
                 what();
         }
+    };
 
-        void operator() (std::function<void(CountType)> what)
+    template <typename CT = unsigned long long>
+    struct execute_with_index : execute_data <execute_with_index<CT>, CT> {
+        using execute_data<execute_with_index<CT>, CT>::execute_data;
+
+        template <typename CallableWithIndex>
+        void operator() (CallableWithIndex what)
         {
-            for (auto i = 0; i < n_times; i++)
-                what(i*step + start);
+            for (auto i = 0; i < this->n_times; i++)
+                what(i*this->step + this->start);
         }
     };
 
@@ -57,9 +64,19 @@ namespace declarative_times {
         return execute<>{ n };
     }
 
+    inline auto operator"" _times_with_index(execute<>::CountType n)
+    {
+        return execute_with_index<>{ n };
+    }
+
     inline auto run(execute<>::CountType n)
     {
         return execute<>{ n };
+    }
+
+    inline auto run_with_index(execute<>::CountType n)
+    {
+        return execute_with_index<>{ n };
     }
 
 }
