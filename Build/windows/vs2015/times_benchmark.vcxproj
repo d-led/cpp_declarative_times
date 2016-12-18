@@ -177,6 +177,7 @@
     <ClInclude Include="..\..\..\src\benchmark\times_fixture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\benchmark\current_version.cpp" />
     <ClCompile Include="..\..\..\src\benchmark\first_metaprogram_version.cpp" />
     <ClCompile Include="..\..\..\src\benchmark\main.cpp" />
     <ClCompile Include="..\..\..\src\benchmark\simpler_version.cpp" />
