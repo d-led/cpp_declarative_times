@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "times_benchmark", "times_benchmark.vcxproj", "{51318F36-BDBC-FCFA-C6CD-7FEF32D858FB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "times_test", "times_test.vcxproj", "{A6487DDB-9200-BF28-FB07-9884E7DE5919}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,14 @@ Global
 		{51318F36-BDBC-FCFA-C6CD-7FEF32D858FB}.Release|Win32.Build.0 = Release|Win32
 		{51318F36-BDBC-FCFA-C6CD-7FEF32D858FB}.Release|x64.ActiveCfg = Release|x64
 		{51318F36-BDBC-FCFA-C6CD-7FEF32D858FB}.Release|x64.Build.0 = Release|x64
+		{A6487DDB-9200-BF28-FB07-9884E7DE5919}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A6487DDB-9200-BF28-FB07-9884E7DE5919}.Debug|Win32.Build.0 = Debug|Win32
+		{A6487DDB-9200-BF28-FB07-9884E7DE5919}.Debug|x64.ActiveCfg = Debug|x64
+		{A6487DDB-9200-BF28-FB07-9884E7DE5919}.Debug|x64.Build.0 = Debug|x64
+		{A6487DDB-9200-BF28-FB07-9884E7DE5919}.Release|Win32.ActiveCfg = Release|Win32
+		{A6487DDB-9200-BF28-FB07-9884E7DE5919}.Release|Win32.Build.0 = Release|Win32
+		{A6487DDB-9200-BF28-FB07-9884E7DE5919}.Release|x64.ActiveCfg = Release|x64
+		{A6487DDB-9200-BF28-FB07-9884E7DE5919}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

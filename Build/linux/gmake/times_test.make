@@ -13,8 +13,8 @@ endif
 ifeq ($(config),debug_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x32/Debug
-  TARGET = $(TARGETDIR)/times_benchmark
-  OBJDIR = ../../../obj/linux/gmake/x32/Debug/times_benchmark
+  TARGET = $(TARGETDIR)/times_test
+  OBJDIR = ../../../obj/linux/gmake/x32/Debug/times_test
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../src/declarative_times -I../../../deps/hayai/src -I../../../deps/Catch/single_include
   FORCE_INCLUDE +=
@@ -42,8 +42,8 @@ endif
 ifeq ($(config),debug_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x64/Debug
-  TARGET = $(TARGETDIR)/times_benchmark
-  OBJDIR = ../../../obj/linux/gmake/x64/Debug/times_benchmark
+  TARGET = $(TARGETDIR)/times_test
+  OBJDIR = ../../../obj/linux/gmake/x64/Debug/times_test
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../src/declarative_times -I../../../deps/hayai/src -I../../../deps/Catch/single_include
   FORCE_INCLUDE +=
@@ -71,8 +71,8 @@ endif
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x32/Release
-  TARGET = $(TARGETDIR)/times_benchmark
-  OBJDIR = ../../../obj/linux/gmake/x32/Release/times_benchmark
+  TARGET = $(TARGETDIR)/times_test
+  OBJDIR = ../../../obj/linux/gmake/x32/Release/times_test
   DEFINES +=
   INCLUDES += -I../../../src/declarative_times -I../../../deps/hayai/src -I../../../deps/Catch/single_include
   FORCE_INCLUDE +=
@@ -100,8 +100,8 @@ endif
 ifeq ($(config),release_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x64/Release
-  TARGET = $(TARGETDIR)/times_benchmark
-  OBJDIR = ../../../obj/linux/gmake/x64/Release/times_benchmark
+  TARGET = $(TARGETDIR)/times_test
+  OBJDIR = ../../../obj/linux/gmake/x64/Release/times_test
   DEFINES +=
   INCLUDES += -I../../../src/declarative_times -I../../../deps/hayai/src -I../../../deps/Catch/single_include
   FORCE_INCLUDE +=
@@ -127,10 +127,8 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/first_metaprogram_version.o \
 	$(OBJDIR)/main.o \
-	$(OBJDIR)/std_function_version.o \
-	$(OBJDIR)/times_fixture.o \
+	$(OBJDIR)/test.o \
 
 RESOURCES := \
 
@@ -145,7 +143,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
-	@echo Linking times_benchmark
+	@echo Linking times_test
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -166,7 +164,7 @@ else
 endif
 
 clean:
-	@echo Cleaning times_benchmark
+	@echo Cleaning times_test
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -188,16 +186,10 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/first_metaprogram_version.o: ../../../src/benchmark/first_metaprogram_version.cpp
+$(OBJDIR)/main.o: ../../../src/test/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/main.o: ../../../src/benchmark/main.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/std_function_version.o: ../../../src/benchmark/std_function_version.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/times_fixture.o: ../../../src/benchmark/times_fixture.cpp
+$(OBJDIR)/test.o: ../../../src/test/test.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

@@ -5,21 +5,21 @@
 namespace {
 
 struct execute {
-    const unsigned long long n;
+    const unsigned long long count;
 
     void operator() (std::function<void()> what) {
-        for (auto i = 0; i < n; i++)
+        for (auto i = 0; i < count; i++)
             what();
     }
 
     void operator() (std::function<void(unsigned long long)> what) {
-        for (auto i = 0; i < n; i++)
+        for (auto i = 0; i < count; i++)
             what(i);
     }
 };
 
-execute operator"" _times(unsigned long long n) {
-    return execute{n};
+execute operator"" _times(unsigned long long count) {
+    return execute{count};
 }
 
 }
