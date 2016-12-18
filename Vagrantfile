@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
     export PATH="$HOME/.linuxbrew/bin:$PATH"
     echo 'export PATH="$HOME/.linuxbrew/bin:$PATH"' >>~/.bash_profile
     brew install gcc cmake
-    echo cd /vagrant >> `pwd`/.profile
+    echo cd /vagrant >> `pwd`/.bash_profile
   SHELL
 
   config.vm.provider "virtualbox" do |v|
