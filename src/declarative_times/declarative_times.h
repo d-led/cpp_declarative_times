@@ -48,14 +48,14 @@ namespace declarative_times {
                 what(i*this->step + this->start);
         }
 
-        execute_with_index starting_from(CountType start_from)
+        execute_with_index starting_from(CT start_from)
         {
-            return execute_with_index{ n_times, start_from };
+            return execute_with_index{ this->n_times, start_from };
         }
 
-        execute_with_index with_step(CountType step_size)
+        execute_with_index with_step(CT step_size)
         {
-            return execute_with_index{ n_times, start, step_size };
+            return execute_with_index{ this->n_times, this->start, step_size };
         }
     };
 
