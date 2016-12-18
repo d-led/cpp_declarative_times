@@ -76,3 +76,33 @@ TEST_CASE_METHOD(declarative_times_should, "terminate on counter overflow and wr
     CHECK(last_seen_counter == 0);
     CHECK(max_seen_counter == 2);
 }
+
+TEST_CASE_METHOD(declarative_times_should, "be immutable") {
+    SECTION("initial configuration") {
+        auto three = 3_times_with_index;
+        three([this](CountType i) { tick(i); });
+
+        CHECK(executed_times == 3);
+        CHECK(last_seen_counter == 2);
+
+        SECTION("with respect to the starting index") {
+            three.starting_from(3)([this](CountType i) { tick(i); });
+            CHECK(executed_times == 6);
+            CHECK(last_seen_counter == 5);
+
+            three([this](CountType i) { tick(i); });
+            CHECK(last_seen_counter == 2);
+        }
+
+        SECTION("with respect to the step size") {
+            three
+                .starting_from(3)
+                .with_step(2)
+                ([this](CountType i) { tick(i); });
+            CHECK(last_seen_counter == 7);
+
+            three([this](CountType i) { tick(i); });
+            CHECK(last_seen_counter == 2);
+        }
+    }
+}
