@@ -8,6 +8,7 @@ using namespace declarative_times;
 
 struct declarative_times_should {
     using CountType = execute<>::CountType;
+
     CountType executed_times = 0;
     CountType last_seen_counter = std::numeric_limits<CountType>::max();
     CountType min_seen_counter = std::numeric_limits<CountType>::max();
@@ -21,6 +22,7 @@ struct declarative_times_should {
         increment();
         min_seen_counter = std::min(min_seen_counter, value);
         max_seen_counter = std::max(max_seen_counter, value);
+        last_seen_counter = value;
     }
 };
 
@@ -61,4 +63,16 @@ TEST_CASE_METHOD(declarative_times_should, "start from non-zero values with cust
     CHECK(executed_times == 3);
     CHECK(min_seen_counter == 2);
     CHECK(max_seen_counter == 8);
+}
+
+TEST_CASE_METHOD(declarative_times_should, "terminate on counter overflow and wrap it as expected") {
+    (3_times)
+        .starting_from(2)
+        .with_step(std::numeric_limits<CountType>::max())
+        ([this](CountType i) { tick(i); });
+
+    CHECK(executed_times == 3);
+    CHECK(min_seen_counter == 0);
+    CHECK(last_seen_counter == 0);
+    CHECK(max_seen_counter == 2);
 }
