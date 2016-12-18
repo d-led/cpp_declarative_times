@@ -36,7 +36,7 @@ namespace declarative_times {
     };
 
     template <typename CT = unsigned long long>
-    struct execute : execute_data <execute<CT>, CT> {
+    struct execute final : execute_data <execute<CT>, CT> {
         using execute_data<execute<CT>, CT>::execute_data;
 
         template <typename Callable>
@@ -48,7 +48,7 @@ namespace declarative_times {
     };
 
     template <typename CT = unsigned long long>
-    struct execute_with_index : execute_data <execute_with_index<CT>, CT> {
+    struct execute_with_index final : execute_data <execute_with_index<CT>, CT> {
         using execute_data<execute_with_index<CT>, CT>::execute_data;
 
         template <typename CallableWithIndex>
